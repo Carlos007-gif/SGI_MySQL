@@ -1,0 +1,10 @@
+SGI_MySQL/
+├── src/
+│   ├── __init__.py
+│   ├── database.py        # Conexión y operaciones DB
+│   ├── gui.py             # Interfaz gráfica principal
+│   └── utils.py           # Funciones auxiliares
+├── data/                  # Para exportar reportes
+├── requirements.txt
+├── README.md
+└── .gitignore
