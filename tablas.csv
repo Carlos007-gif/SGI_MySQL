@@ -1,0 +1,16 @@
+﻿Entidad,Atributos (MariaDB compatible),Tipo de Dato,Restricciones
+PRODUCTOS,id_producto,INT,PRIMARY KEY AUTO_INCREMENT
+,nombre,VARCHAR(100),NOT NULL
+,tipo,"ENUM('papel','toner','encuadernacion')",NOT NULL
+,precio_unitario,"DECIMAL(10,2)",DEFAULT 0.00
+STOCK,id_stock,INT,PRIMARY KEY AUTO_INCREMENT
+,producto_id,INT,FOREIGN KEY
+,cantidad,INT,NOT NULL DEFAULT 0
+,ubicacion,VARCHAR(100),DEFAULT 'Almacen Principal'
+MOVIMIENTOS,id_movimiento,INT,PRIMARY KEY AUTO_INCREMENT
+,producto_id,INT,FOREIGN KEY
+,tipo,"ENUM('entrada','salida')",NOT NULL
+,cantidad,INT,NOT NULL CHECK (>0)
+,fecha,DATETIME,DEFAULT CURRENT_TIMESTAMP
+,responsable,VARCHAR(100),NOT NULL
+,motivo,TEXT,NULL

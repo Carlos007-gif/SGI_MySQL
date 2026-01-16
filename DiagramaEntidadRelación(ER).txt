@@ -1,0 +1,5 @@
+[PRODUCTOS]───◄tiene───[STOCK]
+   │                       │
+   └───◄registra───[MOVIMIENTOS]
+           │
+           └───◄proviene───[PROVEEDORES] (opcional para fase 2)
