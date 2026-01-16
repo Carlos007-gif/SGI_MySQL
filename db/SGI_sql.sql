@@ -81,3 +81,44 @@ SELECT
 FROM productos p
 JOIN stock s ON p.id_producto = s.producto_id
 HAVING nivel_alerta = 'CRITICO';
+
+SHOW TABLES FROM gestion_inventario;
+SELECT * FROM information_schema.views 
+WHERE table_schema = 'gestion_inventario' AND table_name = 'vista_alertas_stock';
+
+-- Insertar productos típicos de fotocopiado
+INSERT INTO productos (nombre, tipo, precio_unitario) VALUES
+('Papel A4 75g', 'papel', 45.00),
+('Toner Negro HP', 'toner', 850.00),
+('Toner Color HP', 'toner', 1200.00),
+('Grapadora', 'encuadernacion', 150.00);
+
+-- Inicializar stock con cantidades realistas
+INSERT INTO stock (producto_id, cantidad, ubicacion) VALUES
+(1, 3000, 'Departamento Fotocopiado'),
+(2, 8, 'Almacen Principal'),
+(3, 5, 'Almacen Principal'),
+(4, 15, 'Departamento Fotocopiado');
+
+-- Registrar algunos movimientos iniciales
+INSERT INTO movimientos (producto_id, tipo, cantidad, responsable, motivo) VALUES
+(1, 'salida', 500, 'Carlos Martinez', 'Impresión de exámenes parciales'),
+(2, 'salida', 2, 'Carlos Martinez', 'Reemplazo de toner en impresora principal'),
+(1, 'entrada', 2000, 'Carlos Martinez', 'Compra mensual de papel');
+
+-- Verificar estado actual del stock
+SELECT 
+    p.nombre AS 'Producto',
+    p.tipo AS 'Categoría',
+    s.cantidad AS 'Cantidad Actual',
+    s.ubicacion AS 'Ubicación'
+FROM productos p
+JOIN stock s ON p.id_producto = s.producto_id;
+
+-- Consultar alertas activas (debe mostrar toners con stock crítico)
+SELECT 
+    nombre AS 'Producto',
+    cantidad AS 'Stock Actual',
+    ubicacion AS 'Ubicación',
+    nivel_alerta AS 'Estado'
+FROM vista_alertas_stock;
